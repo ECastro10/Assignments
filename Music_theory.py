@@ -69,3 +69,4 @@ elif user_input1 == "games":
         print("There will be a chord construction game here")
     elif game_input == "scales quiz":
         print("There will be a scales quiz game here")
+# personal_projects
