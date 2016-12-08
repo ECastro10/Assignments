@@ -24,7 +24,7 @@ def fizzbuzz_steroids(list):
     for i in list:
         if primo(((i ** 2) + 2)) == True and i % 3 == 0:
             print('fizzbuzz')
-        if primo(((i ** 2) + 2)) == True:
+        elif primo(((i ** 2) + 2)) == True:
             print('Fizz')
         elif i % 3 == 0:
             print('Buzz')
@@ -58,3 +58,32 @@ def main():
 
 
 main()
+
+
+
+
+
+'''
+def is_prime:
+    if num == 2 or num == 1:
+        return True
+    elif num % 2 == 0 or num < 0:
+        return False
+    else:
+        for i in range(3, num, 2):
+            if num % i == 0 and i != num:
+                return False
+    return True
+def fizz_buss():
+    for i in range(1,101):
+        num = pow(i, 2)
+        if is_prime(num+2) and i % 3 == 0:
+            print('fizzbuzz')
+        elif i % 3 == 0:
+            print('buzz')
+        elif is_prime(num + 2):
+            print('fizz')
+        else:
+            print(i)
+
+    '''
