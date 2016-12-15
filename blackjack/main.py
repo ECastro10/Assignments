@@ -39,7 +39,7 @@ def player1_turn():
     '''
     INPUT: none
     USAGE: the flow of user's turn
-    OUTPUT: none
+    OUTPUT: prints_info when appropriate
     '''
     h_or_s = input('(h)it or (s)tand? > ')
     if h_or_s == 's':
@@ -55,6 +55,11 @@ def player1_turn():
         player1_turn()
 
 def dealer_turn():
+    '''
+    INPUT: none
+    USAGE: the flow of dealer's turn
+    OUTPUT: prints reveal_dealer_cards when appropriate
+    '''
     if player1.value <= 21 and dealer.value <= 16:
         print('Dealer Hits!')
         hit(dealer)
@@ -80,18 +85,32 @@ def hit(person):
     ace_adjust(person)
 
 def print_info():
+    '''
+    INPUT: none
+    USAGE: to show the user what is going on
+    OUTPUT: prints player 1 value and hand but only 1 card and its value for dealer
+    '''
 
     print('[----------------------------------------------------------------------------]\
 \nPlayer1:\nHand: {}\nValue: {}\n\n\n\nDealer:\nDealer hand: {}\n\
 Dealer Value: {}\n'.format(player1.hand, player1.value,dealer.hand[0], dealer.hand[0].value))
 
 def reveal_dealer_cards():
-
+    '''
+    INPUT: none
+    USAGE: to show all cards and values
+    OUTPUT: prints out all the cards in players hand and total value
+    '''
     print('[----------------------------------------------------------------------------]\
 \nPlayer1:\nHand: {}\nValue: {}\n\n\n\nDealer:\nDealer hand: {}\n\
 Dealer Value: {}\n'.format(player1.hand, player1.value, dealer.hand, dealer.value))
 
 def win_check():
+    '''
+    INPUT: none
+    USAGE: to determine who wins blackjack outside natural blackjack
+    OUTPUT: print statement saying who won and who loss
+    '''
     if dealer.value > 21:
         print('Dealer Busts, Player1 Wins!!')
     elif player1.value > 21:
@@ -104,7 +123,11 @@ def win_check():
         print('Stand off, nobody wins')
 
 def main():
-
+    '''
+    INPUT: none
+    USAGE: to run blackjack game
+    OUTPUT: fun
+    '''
 
     #the first question of the game, play yes or no?
     y_or_no = input('Ready to play Blackjack? (y)es or (n)o? > '.lower())
