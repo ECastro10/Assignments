@@ -161,7 +161,7 @@ def reset_game(person1, person2):
     '''
 
     person1.value, person2.value = 0, 0
-    pdb.set_trace()
+    # pdb.set_trace()
     person1.bet, person2.bet = 0, 0
     deck1.card.extend(person1.hand)
     person1.hand = list()
