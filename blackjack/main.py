@@ -1,11 +1,13 @@
 import random as r
 from deck import Deck
 from player import Player
+import pdb
 
 
 deck1 = Deck()
-player1 = Player()
-dealer = Player()
+player1 = Player(20)
+dealer = Player(20)
+
 
 def ace_adjust(person):
     '''
@@ -17,6 +19,7 @@ def ace_adjust(person):
 
         for i in person.hand:
             if i.value == 11:
+                i.value = 1
                 person.value -= 10
                 break
 
@@ -49,7 +52,7 @@ def player1_turn():
         print('Player1 Hits!')
         hit(player1)
         print_info()
-        if player1.value < 21:
+        if player1.value <= 21:
             player1_turn()
     else:
         player1_turn()
@@ -92,8 +95,10 @@ def print_info():
     '''
 
     print('[----------------------------------------------------------------------------]\
-\nPlayer1:\nHand: {}\nValue: {}\n\n\n\nDealer:\nDealer hand: {}\n\
-Dealer Value: {}\n'.format(player1.hand, player1.value,dealer.hand[0], dealer.hand[0].value))
+\nPlayer1:\nHand: {}\nValue: {}\nBet: {}\n\n\n\nDealer:\nDealer hand: {}\n\
+Dealer Value: {}\nDealer Bet: {}\n'.format(player1.hand, player1.value, player1.bet,dealer.hand[0],
+dealer.hand[0].value, dealer.bet))
+
 
 def reveal_dealer_cards():
     '''
@@ -102,8 +107,10 @@ def reveal_dealer_cards():
     OUTPUT: prints out all the cards in players hand and total value
     '''
     print('[----------------------------------------------------------------------------]\
-\nPlayer1:\nHand: {}\nValue: {}\n\n\n\nDealer:\nDealer hand: {}\n\
-Dealer Value: {}\n'.format(player1.hand, player1.value, dealer.hand, dealer.value))
+\nPlayer1:\nHand: {}\nValue: {}\nBet: {}\n\n\n\nDealer:\nDealer hand: {}\n\
+Dealer Value: {}\nDealer Bet: {}\n'.format(player1.hand, player1.value, player1.bet, dealer.hand, dealer.value,
+dealer.bet))
+
 
 def win_check():
     '''
@@ -113,14 +120,69 @@ def win_check():
     '''
     if dealer.value > 21:
         print('Dealer Busts, Player1 Wins!!')
+        winnings(player1, dealer, 1)
+        reset_game(player1, dealer)
     elif player1.value > 21:
         print('Player1 Busts, Dealer Wins!!')
+        winnings(dealer, player1, 1)
+        reset_game(player1, dealer)
     elif player1.value > dealer.value:
         print('player1 Wins!')
+        winnings(player1, dealer, 1)
+        reset_game(player1, dealer)
     elif player1.value < dealer.value:
         print('Dealer Wins!')
+        winnings(dealer, player1, 1)
+        reset_game(player1, dealer)
     else:
         print('Stand off, nobody wins')
+        player1.money += player1.bet
+        dealer.money += dealer.bet
+        reset_game(player1, dealer)
+
+def winnings(winner, loser, modifier):
+    '''
+    INPUT: two objects, and a modifier for natural blackjack
+    USAGE: to give the correct player the money bet and to reset bets
+    OUTPUT: none
+    '''
+
+    loser_paid = (loser.bet * modifier)
+    difference = (loser_paid - loser.bet)
+    winner.money += loser_paid
+    winner.money += winner.bet
+    loser.money -= difference
+
+def reset_game(person1, person2):
+    '''
+    INPUT: both player objects
+    USAGE: to reset deck, hand, values, and bets
+    OUTPUT: none
+    '''
+
+    person1.value, person2.value = 0, 0
+    pdb.set_trace()
+    person1.bet, person2.bet = 0, 0
+    deck1.card.extend(person1.hand)
+    person1.hand = list()
+    deck1.card.extend(person2.hand)
+    person2.hand = list()
+    # hand_amount = len(person1.hand)
+    # for i in range(0, hand_amount):
+    #     print('Here is player 1 hand before removal {}'.format(player1.hand))
+    #     print('here is deck count before appending {}'.format(len(deck1.card)))
+    #     card = person1.hand.pop()
+    #     deck1.card.append(card)
+    #     print('card per iteration {}'.format(card))
+    #
+    # hand_amount = len(person2.hand)
+    # for i in range(0, hand_amount):
+    #     print('Here is player 1 hand before removal {}'.format(player1.hand))
+    #     print('here is deck count before appending {}'.format(len(deck1.card)))
+    #     card = person2.hand.pop()
+    #     deck1.card.append(card)
+    #     print('card per iteration {}'.format(card))
+
 
 def main():
     '''
@@ -129,33 +191,60 @@ def main():
     OUTPUT: fun
     '''
 
-    #the first question of the game, play yes or no?
-    y_or_no = input('Ready to play Blackjack? (y)es or (n)o? > '.lower())
 
-    #loop to prevent no as an answer
-    while y_or_no != 'y':
-        y_or_no = input('Ready to play Blackjack? (y)es or (n)o? > '.lower())
+    while player1.money != 0 or dealer.money != 0:
 
-    #deal and show stats (does not show both or total value of dealer cards
-    deal(player1)
-    deal(dealer)
-    print_info()
+        #the first question of the game, play yes or no?
+        print('[-----------------------------------------------------------]\
+\n\nYou have ${}\nDealer has ${}'.format(player1.money, dealer.money))
+        y_or_no = input('Minimum buy in = $2\nReady to play Blackjack? (y)es or (n)o? > '.lower())
+        print('length of deck {}'.format(len(deck1.card)))
 
-    if dealer.value == 21 and player1.value == 21:
-        reveal_dealer_cards()
-        print('Natural Blackjack Stand Off\nNobody wins')
-        exit()
-    elif dealer.value == 21 and player1.value < 21:
-        reveal_dealer_cards()
-        print('Natural Blackjack, Dealer wins!')
-        exit()
-    elif dealer.value < 21 and player1.value == 21:
-        reveal_dealer_cards()
-        print('Natural Blackjack, player1 wins')
+        #loop to prevent no as an answer
+        while y_or_no != 'y':
+            y_or_no = input('\nReady to play Blackjack? (y)es or (n)o? > '.lower())
+
+        #deal and show stats (does not show both or total value of dealer cards
+        player1.money -= 2
+        player1.bet += 2
+        deal(player1)
+        dealer.money -= 2
+        dealer.bet += 2
+        deal(dealer)
+        print_info()
+
+
+        if dealer.value == 21 and player1.value == 21:
+            reveal_dealer_cards()
+            print('Natural Blackjack Stand Off\nNobody wins')
+            player1.money += player1.bet
+            dealer.money += dealer.bet
+            reset_game(player1, dealer)
+            main()
+        elif dealer.value == 21 and player1.value < 21:
+            reveal_dealer_cards()
+            print('Natural Blackjack, Dealer wins!')
+            winnings(dealer, player1, 1)
+            reset_game(player1, dealer)
+            main()
+        elif dealer.value < 21 and player1.value == 21:
+            reveal_dealer_cards()
+            print('Natural Blackjack, player1 wins')
+            winnings(player1, dealer, 1.5)
+            reset_game(player1, dealer)
+            main()
+        else:
+            player1_turn()
+            reveal_dealer_cards()
+        win_check()
+
+
+    if dealer.money == 0:
+        print('You Scoundrel, Dealer ran out of money. Thanks for playing')
         exit()
     else:
-        player1_turn()
-    win_check()
+        print('You have a gambling problem and we do not take IOUs, Thank you for your money!')
+        exit()
 
 main()
 
