@@ -1,0 +1,38 @@
+#menu{
+    display:flex;
+    justify-content: space-between;
+    margin-top:40px;
+    width: 98%;
+    border: 10px inset Aqua;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+#current{
+    color:darkred;
+}
+
+a{
+    font-size: 20px;
+    color: orange;
+    text-shadow: 2px 2px brown;
+}
+
+
+#faves{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    text-align: center;
+    z-index: -2;
+
+}
+
+img{
+    border: 5px Aqua outset;
+    border-radius:25px;
+}
+
+h1{
+    text-align:center;
+}

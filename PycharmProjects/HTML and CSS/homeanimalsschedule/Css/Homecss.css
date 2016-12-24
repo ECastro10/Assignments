@@ -1,0 +1,31 @@
+
+#menu{
+    display:flex;
+    justify-content: space-between;
+    margin-top:40px;
+    width: 98%;
+    border: 10px inset Aqua;
+    border-radius: 5px;
+    padding: 10px 0px;
+
+}
+
+a{
+    font-size: 20px;
+    color: orange;
+    text-shadow: 2px 2px brown;
+}
+
+
+#current{
+    color:darkred;
+}
+
+#main{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    color:Navy;
+
+}
+

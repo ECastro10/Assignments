@@ -1,0 +1,11 @@
+h3{
+    color:firebrick;
+}
+
+
+.pets{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+
+}
