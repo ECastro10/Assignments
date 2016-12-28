@@ -13,10 +13,10 @@ function fizzbuzz() {
             console.log('buzz');
     }
         else {
-            console.log(var i);
+            console.log(i);
     }
 
 
 
 
-fizzbuzz()
+fizzbuzz();
