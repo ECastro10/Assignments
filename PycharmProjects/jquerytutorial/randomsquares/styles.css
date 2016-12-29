@@ -1,0 +1,22 @@
+#container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.square{
+    background-color:blue;
+    height:200px;
+    width:200px;
+    margin:15px;
+}
+
+.container1{
+    display:flex;
+    justify-content:space-around;
+}
+
+.container2{
+    display:flex;
+    justify-content: space-around;
+}
