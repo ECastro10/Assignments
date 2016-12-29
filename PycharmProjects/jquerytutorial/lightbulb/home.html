@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquerytutorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+
+    <!--<div id="circle"></div>-->
+    <!--&lt;!&ndash;<p>This is some text</p>&ndash;&gt;-->
+    <!--&lt;!&ndash;<iframe id="myframe" src="http://www.cnn.com"></iframe>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<button id="mybutton">Click Me!</button>&ndash;&gt;-->
+    <!--<div class="squares"></div>-->
+    <!--<div class="squares"></div>-->
+
+
+    <img id="light" src="lightOff.jpg" height="126" width="76"/>
+    <button id="OnOff">On/Off</button>
+    <script>
+
+        var on = false;
+
+        $('#OnOff').click(function() {
+            if (on == false) {
+                $('#light').attr('src', 'lightOn.jpg');
+                on = true;
+
+            } else if (on == true) {
+             $('#light').attr('src', 'lightOff.jpg');
+                on = false;
+            }
+        });
+
+
+
+
+//        $('#circle').click(function() {
+////            or this to make it work for one single element. !!!!!
+////            to make it disappear use ('display', 'none') or .hide
+////            .hide,.fadeOut(milliseconds, function()).fadeIn
+//           $('.squares').fadeOut(500, function(){
+//               $(this).fadeIn();
+//           } );
+//        });
+//
+//        $('.squares').click(function() {
+//            $('#circle').fadeOut(500, function() {
+//                $(this).fadeIn();
+//            });
+//        });
+
+
+//<!--The takeaway here is that you can change attributes-->
+//        $('#mybutton').click(function(){
+//           $('#myframe').attr('src', 'http://www.google.com');
+//        });
+
+
+//       if(jQuery) {
+//           alert('jQuery is installed');
+//       }
+//dollar sign chooses,('regular css syntax').click(name of function to run)
+//        it can be #circle or div
+//        $('#circle').click(function() {
+
+//This basically changes when you hover but returns the original text when you hover out
+//            var oldText = ""
+//            $('#circle').hover(function(){
+//                oldText = $('p').html();
+//               $('p').html('Hello there!');
+//            }, function() {
+//                $('p').html(oldText);
+//            });
+
+//           alert('Fly you fools!');
+
+//            if .html() is empty, it will show the element of .html (in this case p)
+//            $('p').html('Now I am different!');
+//        });
+
+    </script>
+
+
+</body>
+</html>
