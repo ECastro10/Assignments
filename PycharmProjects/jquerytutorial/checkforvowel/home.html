@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check for Vowel</title>
+    <script src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+ <textarea id="wordInput" placeholder="type word in here"></textarea>
+    <button id="checkWord">Check if word has a vowel</button>
+    <p id="validation"></p>
+
+    <script>
+    var word = "";
+    var containsVowel = false;
+
+    $('#checkWord').click(function() {
+        word = $('#wordInput').val();
+        for (var i=0; i<=word.length; i++) {
+            if (word[i] == 'a') {
+                containsVowel = true;
+                break;
+            }
+            else if(word[i] == 'e') {
+                containsVowel = true;
+                break;
+            }
+            else if(word[i] == 'i') {
+                containsVowel = true;
+                break;
+            }
+            else if(word[i] == 'o') {
+               containsVowel = true;
+               break;
+            }
+            else if(word[i] == 'u') {
+                containsVowel = true;
+                break;
+            }
+
+        }
+        if (containsVowel == true) {
+            $('#validation').html('Valid Word');
+        }
+        else if (containsVowel == false) {
+            $('#validation').html('Not a valid word');
+        }
+        containsVowel = false;
+    });
+
+
+    </script>
+</body>
+</html>
