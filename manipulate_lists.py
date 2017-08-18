@@ -60,38 +60,42 @@ started playing with the script and here are my findings.
 # manipulate_that_list will take that file as its input.
 def manipulate_that_list(file_of_inputs):
     """
-    INPUT: an int as first input to determine how many commands to run
-           consequentially.
-    USAGE: To manipulate a list with input feeds
+    INPUT: a txt file that has the list commands, 1 command per line
+    USAGE: To read that txt file, uses the first input which will be an
+           integer, and carries out that number of commands which should
+           all be in that txt file, no more, no less, than that first int.
     OUTPUT: N/A
     """
-    N = int(input())
-    li = list()
-    for _ in range(N):
-        command = input().split()
-        # print("*************")
-        # print("li:")
-        # print(li)
-        # print("***************")
-        # print("command:")
-        print(command)
-        try:
-            getattr(li, command[0])(*(map(int, command[1:])))
-        except AttributeError:
-            exec('{}({})'.format(command[0], 'li'))
 
-def open_file(file_name):
-    '''
-    input: a txt file
-    usage: going to open and read a txt file
-    output: returns a list of words in the txt file
-    '''
-    f = open(file_name)
+    # To make it work locally I made some fun modifications.
+    # First open that file.
+    f = open(file_of_inputs)
+    # Then enumerate the number of lines
     for i, line in enumerate(f):
+        # replace all lines with a single line break instead of the
+        # double line break
         line = line.rstrip().replace('\\n', '\n')
-        print(i, line)
-        # counter = 0
-        # for line in file:
-        #     return line
+        # if line 0, then N = to that integer and instantiate list object
+        if i == 0:
+            N = int(line)
+            li = list()
+        # if line number is not 0
+        else:
+            # If line number is greater than N, break the loop
+            if i > N:
+                break;
+            # else, variable command = to split of the line in file
+            else:
+                # These print statements are here to see what the line
+                # line looks like before and after the split.
+                # We split it in order to map the function.
+                # print("Line: ", line)
+                command = line.split()
+                # print(command)
+                try:
+                    getattr(li, command[0])(*(map(int, command[1:])))
+                except AttributeError:
+                    exec('{}({})'.format(command[0], 'li'))
+    f.close()
 
-open_file("manipulate_lists_inputs.txt")
+manipulate_that_list("manipulate_lists_inputs.txt")
