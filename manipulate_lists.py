@@ -42,6 +42,7 @@ of reasons.
 avoided.
 
 **************************************************************************
+***Code By wx2020 on hackerrank***
 if __name__ == '__main__':
     N = int(input())
     li = list()
@@ -55,6 +56,9 @@ if __name__ == '__main__':
 
 I didn't quite understand how they all played together though so I
 started playing with the script and here are my findings.
+
+NOTE: I wanted to mimic it reading a file of inputs hence why the addition
+of a file reader.
 """
 # First, I created a separate file called manipulate_lists_inputs.txt
 # manipulate_that_list will take that file as its input.
@@ -93,6 +97,10 @@ def manipulate_that_list(file_of_inputs):
                 command = line.split()
                 # print(command)
                 try:
+                    # Here comes the fun part
+                    # 1. getattr(li, command[0]) == getattr(object<list>,
+                    #   "string name of function")
+                    # 2.
                     getattr(li, command[0])(*(map(int, command[1:])))
                 except AttributeError:
                     exec('{}({})'.format(command[0], 'li'))
